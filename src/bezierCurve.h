@@ -40,7 +40,7 @@ namespace CGL {
                                                           // * * *
                                                           // * *
                                                           // *
-
+    //这个是算法分割使用的比例参数
     float t; // Value between 0 and 1 to evaluate the Bezier curve at
     int numControlPoints;
 

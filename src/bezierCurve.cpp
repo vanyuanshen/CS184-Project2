@@ -15,6 +15,7 @@ namespace CGL {
     controlPoints = std::vector<Vector2D>(numControlPoints);
   }
 
+  //从文件中读取控制点
   void BezierCurve::loadControlPoints(FILE* file)
   {
     for (int i = 0; i < numControlPoints; i++)
