@@ -38,15 +38,61 @@ namespace CGL
         // Evaluate the Bezier surface at parameters (u, v) through 2D de Casteljau subdivision.
         // (i.e. Unlike Part 1 where we performed one subdivision level per call to evaluateStep, this function
         // should apply de Casteljau's algorithm until it computes the final, evaluated point on the surface)
-        return Vector3D();
+        // 现在第一次形成四条曲线用的参数u，第二次形成曲面用的参数v
+//        std::vector<Vector3D> tmpControlPoints;
+//        for(int numCurves = 0; numCurves < controlPoints.size(); numCurves++)
+//        {
+//            tmpControlPoints.push_back(evaluate1D(controlPoints[numCurves], u));
+//        }
+//        Vector3D finalPoint(evaluate1D(tmpControlPoints, v));
+//        return finalPoint;
+        std::vector<Vector3D> p;
+        for(int i = 0; i < controlPoints.size(); ++i){
+            p.push_back(evaluate1D(controlPoints[i], u));
+        }
+        return evaluate1D(p,v);
     }
 
+    //返回1D贝塞尔曲线上的一个点
     Vector3D BezierPatch::evaluate1D(std::vector<Vector3D> points, double t) const
     {
         // TODO Part 2.
         // Optional helper function that you might find useful to implement as an abstraction when implementing BezierPatch::evaluate.
         // Given an array of 4 points that lie on a single curve, evaluates the Bezier curve at parameter t using 1D de Casteljau subdivision.
-        return Vector3D();
+
+        //我的解决方案
+        std::vector<Vector3D> tmpControlPoints(points);
+        std::vector<Vector3D> finalControlPoints;
+
+        while (tmpControlPoints.size() >= 2)
+        {
+            finalControlPoints.clear();
+            for (int j = 1; j < tmpControlPoints.size(); j++) {
+                Vector3D tmp(tmpControlPoints[j - 1] * (1 - t) + tmpControlPoints[j] * t);
+                finalControlPoints.push_back(tmp);
+            }
+            tmpControlPoints.clear();
+            tmpControlPoints.assign(finalControlPoints.begin(), finalControlPoints.end());
+        }
+        Vector3D result;
+        if (!finalControlPoints.empty())
+        {
+            result = finalControlPoints[0];
+        }
+        return result;
+
+        //别人的解决方案
+//        std::vector<std::vector<Vector3D> > evaluatedLevels;
+//        evaluatedLevels.push_back(points);
+//        while(evaluatedLevels.size() != points.size()){
+//            std::vector<Vector3D> newLevel;
+//            for(int i = 0; i < evaluatedLevels.back().size(); ++i){
+//                newLevel.push_back(Vector3D(evaluatedLevels.back()[i] * (1-t) + evaluatedLevels.back()[i+1] * t));
+//            }
+//            evaluatedLevels.push_back(newLevel);
+//        }
+//
+//        return evaluatedLevels.back()[0];
     }
 
 

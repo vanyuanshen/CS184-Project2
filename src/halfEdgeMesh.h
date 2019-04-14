@@ -686,7 +686,7 @@ if (f->halfedge() == h)
           * Here's where the mesh elements are actually stored---this is the one
           * and only place we have actual data (rather than pointers/iterators).
           */
-         list<Halfedge> halfedges;
+         list<Halfedge> halfedges;      //list就是双向链表
          list<Vertex> vertices;
          list<Edge> edges;
          list<Face> faces;

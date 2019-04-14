@@ -79,7 +79,7 @@ namespace CGL {
 
       // Also store the vertex degree, i.e., the number of polygons that use each
       // vertex; this information will be used to check that the mesh is manifold.
-      map<VertexIter,Size> vertexDegree;
+      map<VertexIter,Size> vertexDegree;        //用来检测是否manifold，不满足欧拉定理应该就不是
 
       // First, we do some basic sanity checks on the input.
       for( PolygonListCIter p = polygons.begin(); p != polygons.end(); p++ )
@@ -360,11 +360,12 @@ namespace CGL {
           }
           h = h->twin()->next();
         }
-        while( h != v->halfedge() );
+        while( h != v->halfedge() );            //在这个循环结束的时候表明转回了起始的halfedge
 
         if( count != vertexDegree[v] )
         {
           cerr << "Error converting polygons to halfedge mesh: at least one of the vertices is nonmanifold." << endl;
+          cerr << "now count = " << count << " and degree = " << vertexDegree[v] << endl;
           exit( 1 );
         }
       } // end loop over vertices
