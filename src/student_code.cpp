@@ -102,7 +102,30 @@ namespace CGL
         // TODO Returns an approximate unit normal at this vertex, computed by
         // TODO taking the area-weighted average of the normals of neighboring
         // TODO triangles, then normalizing.
-        return Vector3D();
+
+        Vector3D normal(0,0,0);         // initialize a vector to store your normal sum
+        HalfedgeCIter h = halfedge();   // Since we're in a Vertex, this returns a halfedge
+        HalfedgeCIter hConst = h;
+        double sum = 0.;
+
+        do
+        {
+            //要取得是平面的normal，而不是点的normal
+            Vector3D nighborNormal(h->face()->normal());
+            //下面是两个向量，然后做叉乘
+            Vector3D v1(h->vertex()->position - (h->twin()->vertex())->position);
+            Vector3D v2(h->vertex()->position - (h->twin()->next()->twin()->vertex()->position));
+            double tmpWeight = cross(v1, v2).norm();
+            sum += tmpWeight;
+            //三角形面积的两倍（平行四边形的面积）乘上normal累加上去
+            normal += nighborNormal * tmpWeight;
+            //std::cout<< "暂时输出normal为" << normal<<std::endl;
+            h = h->twin()->next();
+        }while(h != hConst);
+
+        //最后归一化
+        normal /= sum;
+        return normal;
     }
 
     EdgeIter HalfedgeMesh::flipEdge(EdgeIter e0)
