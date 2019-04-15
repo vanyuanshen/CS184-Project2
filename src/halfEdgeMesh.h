@@ -162,6 +162,11 @@ typedef size_t Size;
 namespace CGL
 {
    /*
+    * 所以halfedgemesh就是一个三角形代表的mesh（不一定非的是三角形）
+    * 包含了vertex，edge，halfedge，face这四种基本的元素
+    */
+
+   /*
     * A HalfedgeMesh is comprised of four atomic element types:
     * vertices, edges, faces, and halfedges.
     */
@@ -260,6 +265,7 @@ namespace CGL
     */
    class HalfedgeElement
    {
+       //这就是一个edge，face，halfedge，vertex都继承的基类
       public:
 
          /**
@@ -631,7 +637,8 @@ namespace CGL
          VertexIter      splitEdge( EdgeIter e ); ///< split an edge, returning a pointer to the inserted midpoint vertex; the halfedge of this vertex should refer to one of the edges in the original mesh
 
 
-         void check_for(HalfedgeIter h) {
+         void check_for(HalfedgeIter h)
+         {
           for (HalfedgeIter he = halfedgesBegin(); he != halfedgesEnd(); he++) {
             if (he == h)
               cout << "Halfedge " << elementAddress(h) << " found in list" << endl;
@@ -660,21 +667,27 @@ if (f->halfedge() == h)
           }
 
          }
-         void check_for(VertexIter v) {
+
+         void check_for(VertexIter v)
+         {
           for (HalfedgeIter he = halfedgesBegin(); he != halfedgesEnd(); he++) {
             if (he->vertex() == v)
               cout << "Vertex " << elementAddress(v) << " found in h.e. "
               << elementAddress(he) << endl;
             }
          }
-         void check_for(EdgeIter e) {
+
+         void check_for(EdgeIter e)
+         {
           for (HalfedgeIter he = halfedgesBegin(); he != halfedgesEnd(); he++) {
             if (he->edge() == e)
               cout << "Edge " << elementAddress(e) << " found in h.e. "
               << elementAddress(he) << endl;
             }
          }
-         void check_for(FaceIter f) {
+
+         void check_for(FaceIter f)
+         {
           for (HalfedgeIter he = halfedgesBegin(); he != halfedgesEnd(); he++) {
             if (he->face() == f)
               cout << "Face " << elementAddress(f) << " found in h.e. "
