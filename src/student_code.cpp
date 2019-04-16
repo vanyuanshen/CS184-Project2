@@ -247,7 +247,113 @@ namespace CGL
         // TODO Part 5.
         // TODO This method should split the given edge and return an iterator to the newly inserted vertex.
         // TODO The halfedge of this vertex should point along the edge that was split, rather than the new edges.
-        return newVertex();
+
+        FaceIter f0 = e0->halfedge()->face();
+        FaceIter f1 = e0->halfedge()->twin()->face();
+
+        if(f0->isBoundary() || f1->isBoundary())
+        {
+            return newVertex();
+        }
+
+        HalfedgeIter h0 = e0->halfedge();
+        HalfedgeIter h1 = h0->next();
+        HalfedgeIter h2 = h1->next();
+        HalfedgeIter h3 = h0->twin();
+        HalfedgeIter h4 = h3->next();
+        HalfedgeIter h5 = h4->next();
+        HalfedgeIter h6 = h1->twin();
+        HalfedgeIter h7 = h2->twin();
+        HalfedgeIter h8 = h4->twin();
+        HalfedgeIter h9 = h5->twin();
+
+        VertexIter v0 = h0->vertex();
+        VertexIter v1 = h3->vertex();
+        VertexIter v2 = h6->vertex();
+        VertexIter v3 = h8->vertex();
+
+        EdgeIter e1 = h1->edge();
+        EdgeIter e2 = h2->edge();
+        EdgeIter e3 = h4->edge();
+        EdgeIter e4 = h5->edge();
+
+        //创建新的halfElement
+
+        //三条新的edge
+        EdgeIter e5 = newEdge();
+        EdgeIter e6 = newEdge();
+        EdgeIter e7 = newEdge();
+
+        //六个新的halfedge
+        HalfedgeIter h10 = newHalfedge();
+        HalfedgeIter h11 = newHalfedge();
+        HalfedgeIter h12 = newHalfedge();
+        HalfedgeIter h13 = newHalfedge();
+        HalfedgeIter h14 = newHalfedge();
+        HalfedgeIter h15 = newHalfedge();
+
+        //两个新的face
+        FaceIter f2 = newFace();
+        FaceIter f3 = newFace();
+
+        //一个新的vertex
+        VertexIter v4 = newVertex();
+        v4->position = (v1->position + v0->position) / 2;
+
+        //重新分配
+        h0->setNeighbors(h1, h3, v4, e0, f0);
+
+        h1->setNeighbors(h10, h6, v1, e1, f0);
+
+        h2->setNeighbors(h14, h7, v2, e2, f3);
+
+        h3->setNeighbors(h11, h0, v1, e0, f1);
+
+        h4->setNeighbors(h12, h8, v0, e3, f2);
+
+        h5->setNeighbors(h3, h9, v3, e4, f1);
+
+        h6->setNeighbors(h6->next(), h1, v2, e1, h6->face());
+
+        h7->setNeighbors(h7->next(), h2, v0, e2, h7->face());
+
+        h8->setNeighbors(h8->next(), h4, v3, e3, h8->face());
+
+        h9->setNeighbors(h9->next(), h5, v1, e4, h9->face());
+
+        h10->setNeighbors(h0, h15, v2, e5, f0);
+
+        h11->setNeighbors(h5, h12, v4, e7, f1);
+
+        h12->setNeighbors(h13, h11, v3, e7, f2);
+
+        h13->setNeighbors(h4, h14, v4, e6, f2);
+
+        h14->setNeighbors(h15, h13, v0, e6, f3);
+
+        h15->setNeighbors(h2, h10, v4, e5, f3);
+
+        e0->halfedge() = h0;
+        e1->halfedge() = h1;
+        e2->halfedge() = h2;
+        e3->halfedge() = h4;
+        e4->halfedge() = h5;
+        e5->halfedge() = h10;
+        e6->halfedge() = h14;
+        e7->halfedge() = h11;
+
+        f0->halfedge() = h0;
+        f1->halfedge() = h3;
+        f2->halfedge() = h4;
+        f3->halfedge() = h2;
+
+        v0->halfedge() = h4;
+        v1->halfedge() = h3;
+        v2->halfedge() = h2;
+        v3->halfedge() = h5;
+        v4->halfedge() = h0;
+
+        return v4;
     }
 
 

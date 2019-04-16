@@ -5,8 +5,8 @@
       <config projectName="ColladaViewer" targetName="glfw" />
       <config projectName="ColladaViewer" targetName="uninstall" />
       <config projectName="ColladaViewer" targetName="CGL" />
-      <config projectName="ColladaViewer" targetName="glew" />
       <config projectName="ColladaViewer" targetName="meshedit" />
+      <config projectName="ColladaViewer" targetName="glew" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -15,14 +15,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c104c4a-b9b5-49b5-9d90-d3f7bd0c0bf5" name="Default Changelist" comment="">
+    <list default="true" id="7c104c4a-b9b5-49b5-9d90-d3f7bd0c0bf5" name="Default Changelist" comment="finish part4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/meshedit" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/meshedit" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/halfEdgeMesh.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/halfEdgeMesh.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/meshEdit.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/meshEdit.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/student_code.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/src/CMakeFiles/meshedit.dir/student_code.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/halfEdgeMesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/halfEdgeMesh.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/student_code.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/student_code.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -51,21 +47,22 @@
     <session id="-1913879545">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.10" value="2" />
+          <entry key="project.open.time.11" value="2" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.21" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="cpp" value="9" />
+          <entry key="cpp" value="10" />
           <entry key="frag" value="1" />
           <entry key="h" value="15" />
           <entry key="iosfwd" value="1" />
@@ -77,19 +74,21 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="1" />
-          <entry key="ObjectiveC" value="29" />
+          <entry key="ObjectiveC" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="3342" />
+          <entry key="cpp" value="4299" />
           <entry key="h" value="213" />
+          <entry key="txt" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Doxygen file" value="1" />
-          <entry key="ObjectiveC" value="3554" />
+          <entry key="ObjectiveC" value="4511" />
+          <entry key="PLAIN_TEXT" value="18" />
         </counts>
       </usages-collector>
     </session>
@@ -102,8 +101,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/student_code.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="236" column="28" selection-start-line="236" selection-start-column="28" selection-end-line="236" selection-end-column="28" />
+            <state relative-caret-position="158">
+              <caret line="340" column="29" lean-forward="true" selection-start-line="340" selection-start-column="29" selection-end-line="340" selection-end-column="29" />
               <folding>
                 <element signature="e#35#60#0" expanded="true" />
               </folding>
@@ -112,10 +111,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/meshEdit.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="1554" column="31" selection-start-line="1554" selection-start-column="31" selection-end-line="1554" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/halfEdgeMesh.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-12">
-              <caret line="289" column="1" selection-start-line="289" selection-start-column="1" selection-end-line="289" selection-end-column="1" />
+            <state relative-caret-position="-7238">
+              <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -123,12 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/halfEdgeMesh.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-439">
-              <caret line="420" column="9" selection-start-line="420" selection-start-column="9" selection-end-line="420" selection-end-column="9" />
-              <folding>
-                <element signature="e#17117#17895#0" />
-                <element signature="e#17906#18610#0" />
-              </folding>
+            <state relative-caret-position="135">
+              <caret line="610" column="94" selection-start-line="610" selection-start-column="94" selection-end-line="610" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -136,7 +140,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CGL/include/CGL/vector3D.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
+            <state relative-caret-position="536">
               <caret line="100" column="16" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
             </state>
           </provider>
@@ -164,6 +168,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Joker" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -185,7 +194,6 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="388" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="736" />
@@ -290,12 +298,15 @@
       <workItem from="1555214777582" duration="7263000" />
       <workItem from="1555252733136" duration="131000" />
       <workItem from="1555282134218" duration="627000" />
-      <workItem from="1555313806995" duration="13586000" />
+      <workItem from="1555313806995" duration="13912000" />
+      <workItem from="1555335496030" duration="162000" />
+      <workItem from="1555383173479" duration="374000" />
+      <workItem from="1555395515049" duration="2408000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29517000" />
+    <option name="totallyTimeSpent" value="32787000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -307,9 +318,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="388" y="23" width="1280" height="736" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="736" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989011" weight="0.17043619" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989011" visible="true" weight="0.17285945" />
       <window_info id="Structure" order="1" sideWeight="0.50109893" side_tool="true" weight="0.17043619" />
       <window_info id="Favorites" order="2" sideWeight="0.50109893" side_tool="true" weight="0.17043619" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -320,11 +331,11 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.23349437" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49919224" visible="true" weight="0.25925925" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50080776" side_tool="true" weight="0.30595812" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49919224" visible="true" weight="0.20772947" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50080776" side_tool="true" weight="0.23510467" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32850242" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.32850242" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.23510467" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49919224" weight="0.23510467" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -337,6 +348,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="finish part4" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish part4" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/shader/frag">
@@ -439,42 +454,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/halfEdgeMesh.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7238">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/meshEdit.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="113" selection-start-line="113" selection-end-line="113" />
+        <state relative-caret-position="249">
+          <caret line="1554" column="31" selection-start-line="1554" selection-start-column="31" selection-end-line="1554" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CGL/include/CGL/vector3D.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
+        <state relative-caret-position="536">
           <caret line="100" column="16" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/halfEdgeMesh.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12">
-          <caret line="289" column="1" selection-start-line="289" selection-start-column="1" selection-end-line="289" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/halfEdgeMesh.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-439">
-          <caret line="420" column="9" selection-start-line="420" selection-start-column="9" selection-end-line="420" selection-end-column="9" />
-          <folding>
-            <element signature="e#17117#17895#0" />
-            <element signature="e#17906#18610#0" />
-          </folding>
+        <state relative-caret-position="135">
+          <caret line="610" column="94" selection-start-line="610" selection-start-column="94" selection-end-line="610" selection-end-column="94" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/student_code.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="236" column="28" selection-start-line="236" selection-start-column="28" selection-end-line="236" selection-end-column="28" />
+        <state relative-caret-position="158">
+          <caret line="340" column="29" lean-forward="true" selection-start-line="340" selection-start-column="29" selection-end-line="340" selection-end-column="29" />
           <folding>
             <element signature="e#35#60#0" expanded="true" />
           </folding>
