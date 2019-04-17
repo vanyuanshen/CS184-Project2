@@ -239,6 +239,8 @@ namespace CGL
         f0->halfedge() = h0;
         f1->halfedge() = h3;
 
+
+
         return e0;
     }
 
@@ -253,7 +255,7 @@ namespace CGL
 
         if(f0->isBoundary() || f1->isBoundary())
         {
-            return newVertex();
+            return e0->halfedge()->vertex();
         }
 
         HalfedgeIter h0 = e0->halfedge();
@@ -278,6 +280,7 @@ namespace CGL
         EdgeIter e4 = h5->edge();
 
         //创建新的halfElement
+        //这里创建的时候已经加入mesh的list里面去了，所以确实改变了mesh的list
 
         //三条新的edge
         EdgeIter e5 = newEdge();
@@ -371,9 +374,52 @@ namespace CGL
         // TODO Compute new positions for all the vertices in the input mesh, using the Loop subdivision rule,
         // TODO and store them in Vertex::newPosition. At this point, we also want to mark each vertex as being
         // TODO a vertex of the original mesh.
+        for(auto it = mesh.verticesBegin(); it!= mesh.verticesEnd(); it++)
+        {
+            //先计算新的位置
+            it->isNew = false;
+            Vector3D newPosition(0, 0, 0);
+            float sum = 0;
+            auto nit = it->halfedge()->twin();
+            auto originNit = nit;
+            auto n = it->degree();
+            //注意！！！！浮点数，如果直接3/16是0
+            float u = (n == 3) ? (3.0/16.0) : (3.0 / (8.0 * n));
+            do{
+                sum += u;
+                newPosition = newPosition + u * (nit->vertex()->position);
+                nit = nit->next()->twin();
+            }while (nit != originNit);
+            sum += 1 - n*u;
+            newPosition = newPosition + (1.0 - n*u) * it->position;
+            newPosition = newPosition / sum;
+            it->newPosition = newPosition;
+        }
 
 
         // TODO Next, compute the updated vertex positions associated with edges, and store it in Edge::newPosition.
+        // 这一步应该是计算将要创建的新点的位置（差不多是中点，然后放在edge的newPosition里）
+        // 对于边界情况，我觉得直接中点就完事了
+        for(auto it = mesh.edgesBegin(); it!=mesh.edgesEnd(); it++)
+        {
+            //每个边上一个新的点
+            Vector3D newPosition(0, 0, 0);
+            if(it->halfedge()->face()->isBoundary() || it->halfedge()->twin()->face()->isBoundary())
+            {
+                //边界情况直接中点
+                newPosition = it->halfedge()->vertex()->position / 2.0 + it->halfedge()->twin()->vertex()->position / 2.0;
+            }
+            else
+            {
+                Vector3D v0 = it->halfedge()->vertex()->position;
+                Vector3D v1 = it->halfedge()->twin()->vertex()->position;
+                Vector3D v2 = it->halfedge()->next()->twin()->vertex()->position;
+                Vector3D v3 = it->halfedge()->twin()->next()->twin()->vertex()->position;
+                //注意啦，这里也被round to zero了，记住浮点数
+                newPosition = v0 * 3.0/8.0 + v1 * 3.0/8.0 + v2 * 1.0/8.0 + v3 * 1.0/8.0;
+            }
+            it->newPosition = newPosition;
+        }
 
 
         // TODO Next, we're going to split every edge in the mesh, in any order.  For future
@@ -382,13 +428,63 @@ namespace CGL
         // TODO by setting the flat Edge::isNew.  Note that in this loop, we only want to iterate
         // TODO over edges of the original mesh---otherwise, we'll end up splitting edges that we
         // TODO just split (and the loop will never end!)
+        // 这里一开始我没想明白，还以为要重新实现不同的split，但实际上就是对于mesh的三个边使用上一个part中的split函数
+        // 得到的就是ppt中的第一步结果，然后再flip就好啦
+        // 问题：每次split和flip，mesh到底变不变？貌似是不变的
+        // 解答：对，就是不变的，所以一个mesh一开始是可能就覆盖一个面（三角形）,后面可能就有多个面，边，点等等
+        vector<EdgeIter> originEdgeList;
+        auto copyIt = mesh.edgesBegin();
+        do{
+            auto newIt = copyIt;
+            newIt->isNew = false;               //一开始遍历的时候每次都改成false
+            originEdgeList.push_back(newIt);
+            copyIt++;
+        }while(copyIt != mesh.edgesEnd());
+
+        //注意这里，it是EdgeIter的iterator，而*it才是EdgeIter类型
+        int countIt = 0;
+        for(auto it = originEdgeList.begin(); it != originEdgeList.end(); it++)
+        {
+            // 返回split之后的点
+            countIt++;
+            auto v = mesh.splitEdge(*it);
+            // 注意isNew的修改,这里将除了最初的edge以外的新创建的edge全部改为true;
+            v->isNew = true;
+            // 同时这里需要把edge的newPosition赋值给新创建的点。（如果没有这一步，最后copy
+            // newPosition 到 position的时候就为空了。
+            v->newPosition = (*it)->newPosition;
+
+            auto newHalfIt = v->halfedge();
+//
+//            auto originHalfIt = newHalfIt;
+//            do {
+//                newHalfIt->edge()->isNew = true;
+//                newHalfIt = newHalfIt->twin()->next();
+//            }while(newHalfIt != originHalfIt);
+
+            newHalfIt->edge()->isNew = false;
+            newHalfIt->twin()->next()->edge()->isNew = true;
+            newHalfIt->twin()->next()->twin()->next()->edge()->isNew = false;
+            newHalfIt->next()->next()->edge()->isNew = true;
+        }
 
 
         // TODO Now flip any new edge that connects an old and new vertex.
-
+        // 然后再flip
+        for(auto it = mesh.edgesBegin(); it != mesh.edgesEnd(); it++)
+        {
+            // != 与异或的功能一致
+            if(it->halfedge()->vertex()->isNew != it->halfedge()->twin()->vertex()->isNew )
+            {
+                if(it->isNew)
+                    mesh.flipEdge(it);
+            }
+        }
 
         // TODO Finally, copy the new vertex positions into final Vertex::position.
-
-        return;
+        for(auto it = mesh.verticesBegin(); it != mesh.verticesEnd(); it++)
+        {
+            it->position = it->newPosition;
+        }
     }
 }
